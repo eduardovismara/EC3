@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src ="CadastroProdutos.js">	</script>
+	<title>Aula Exemplo</title>
+
+</head>
+<body onload="inicial()">
+	<p>Exemplo de sistemas</p>
+	<div id = "Controler">
+		<a onclick="Incical()">Inicial</a>-
+		<a onclick="Produtos()">Produtos</a>-
+		<a onclick="Categorias()">Categorias</a>-
+		<a onclick="Sobre()">Sobre</a>
+	</div>
+	
+	<!--controla principal-->
+	<div id="Principal">
+		Tela Principal
+	</div>
+
+	<!--controla produtos-->
+	<div id="Produtos">
+		<select id="selecionarProduto" onchange="selecionar(this)"></select>
+		<input type="button" value="Cadastrar" onclick="adicionarProdutos('Teste','Teste2',3)"></input>
+	</div>
+	
+	<!--controla categorias-->
+	<div id="Categorias">
+		Tela Categorias
+	</div>
+	
+	<!--controla sobre-->
+	<div id="Sobre">
+		 Sobre
+	</div>
+
+
+
+
+</body>
+</html>
