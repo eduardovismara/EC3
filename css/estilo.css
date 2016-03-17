@@ -109,3 +109,19 @@ table{
 
   
 }
+
+#labelProduto{
+	float: left;
+}
+
+#labelPreco{
+	float: left;
+}
+
+#labelData{
+	float: left;
+}
+#labelObs{
+	float: left;
+}
+
