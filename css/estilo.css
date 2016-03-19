@@ -12,13 +12,14 @@ body{
 	width: 940px;
 	font: 13px Verdana, geneva, sans-serif;	
 	color: #000;
+	background-color: #f5f5f5;
 }
 
 section.cabecalho{
 	background:  #DDEEEE;
 	height: 116px;
 	white-space: 940;
-	background-color: #f5f5f5;
+	background-color: #FFF;
 }
 
 img.logo{
@@ -30,7 +31,7 @@ footer{
 	background:  #DDEEEE;
 	height: 100px;
 	white-space: 940;
-	background-color: #f5f5f5;
+	background-color: #FFF;
 	margin-top: 2px;
 }
 
@@ -82,7 +83,7 @@ nav ul li a.selecionado{
 section#conteudo{
 	height: auto;
 	white-space: 940;	
-	background-color: #f5f5f5;
+	background-color: #FFF;
 	margin-top: 2px;
 	padding-left: 10px;
 }
@@ -123,5 +124,10 @@ table{
 }
 #labelObs{
 	float: left;
+}
+
+label {
+    display: inline-block;
+    width: 90px;
 }
 

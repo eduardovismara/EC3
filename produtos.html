@@ -4,7 +4,8 @@
 		<title>Produtos</title>
 		<meta charset="UTF-8">		
 		<link rel="stylesheet" type="text/css" href="css/estilo.css">
-		<script src="js/menu.js"></script>		
+		<script src="js/menu.js"></script>
+		<script src="js/db.js"></script>
 	</head>
 
 	<body onload="montaMenu()">
@@ -14,28 +15,28 @@
 		<section id="conteudo">	
 			<h1> Produtos </h1>			
 			<p>
-				<input type="button" value="Novo Produto">
+				<input type="button" value="Novo Produto" name="btnNovoProd" onclick="window.location.href='CadastroProduto.html'">
 			</p>
 
 			<label>Nome</label>
-			<INPUT type="text" size=30>
-			<INPUT type=button value="Pesquisar" onClick="pesquisarTabela()">
+			<input type="text" size=30>
+			<input type="button" value="Pesquisar" onClick="pesquisarTabela()">
 
-	<table border="1">
-		<tr>
-			<td>Produtos</td>
-			<td>Ações</td>
-		</tr>
-		<tr>
-			<td>Produto1</td>
-			<td> <img src="imgs/editar.png"> <img src="imgs/excluir.png" ></td>
-		</tr>
+			<table border="1">
 				<tr>
-			<td>Produto2</td>
-			<td> <img src="imgs/editar.png"> <img src="imgs/excluir.png" ></td>
-		</tr>
-	
-	</table>	
+					<td>Produtos</td>
+					<td>Ações</td>
+				</tr>
+				<tr>
+					<td>Produto1</td>
+					<td> <img src="imgs/editar.png"> <img src="imgs/excluir.png" ></td>
+				</tr>
+						<tr>
+					<td>Produto2</td>
+					<td> <img src="imgs/editar.png"> <img src="imgs/excluir.png" ></td>
+				</tr>
+			
+			</table>	
 
 		</section>
 		
@@ -44,11 +45,6 @@
 			
 				
 		</footer>
-
-		
-
-
-
 
 	</body>
 </html>

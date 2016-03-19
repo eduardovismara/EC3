@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 	<head>
-		<title>Edição</title>
+		<title>Cadastro de Produto</title>
 		<meta charset="UTF-8">		
 		<link rel="stylesheet" type="text/css" href="css/estilo.css">
-		<script src="js/menu.js"></script>		
+		<script src="js/menu.js"></script>
+		<script src="js/db.js"></script>
 	</head>
 
 	<body onload="montaMenu()">
@@ -14,42 +15,30 @@
 		<section id="conteudo">	
 
 			<h1>Cadastro de Produtos</h1>	
+			<br>
+
+			<form>
 			
-			<div id="labelProduto">
 				<label>Produto</label>
-			</div>
 			
-			<div id="textProduto">
-				<input type="text" size="30">
-			</div>
-			<Br>
+				<input type="text" size="40px" name="txtProduto"><br><br>
 		
-
-			<div id="labelPreco">
-				<label>Preço</label>
-			</div>
+			    <label>Preço</label>
 			
-			<div id="textPreco">
-				<input type="text" size="30">
-			</div>
+				<input type="text" size="5px" name="txtPreco"><br><br>
 				
-			<Br>
-			<div id="labelData">
 				<label>Data</label>
-			</div>
 
-			<div id="textData">
-				<input type="text" size="30">
-			</div>
+				<input type="date" size="20px" name="txtData"><br><br>
 			
-			<Br>
-			<div id="labelObs">
 				<label>Observação</label>
-			</div>
 
-			<div id="textObs">
-				<input type="text" size="30">
-			</div>
+				<input type="text" size="40px" name="txtObs"><br><br>
+
+				<input type="button" value="Cadastrar" onclick="cadastraProduto()">
+				<input type="button" value="Limpar">
+
+			</form>
 			
 
 		</section>
