@@ -47,13 +47,12 @@ function alteraProduto(idEdit){
 	var txtcategoria = y[x].value;
 	for (var i = 0; i < produtos_volta.length; i++) {
 		var obj = produtos_volta[i];
-		if (obj.id == idEdit) {
+		if (obj.id == idEdit) {			
 			obj.produto = txtproduto;
-			obj.produto = txtproduto,
-			obj.categoria = txtcategoria,
-			obj.preco = txtpreco,
-			obj.data = txtdata,
-			obj.obs = txtobs,
+			obj.categoria = txtcategoria;
+			obj.preco = txtpreco;
+			obj.data = txtdata;
+			obj.obs = txtobs;
 			obj.ativo = txtativo;
 			break;
 		}
