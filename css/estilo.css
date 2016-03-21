@@ -105,29 +105,21 @@ p{
 	color: #000;	
 
 }
-table{
-	width:400px;
-
-  
-}
-
-#labelProduto{
-	float: left;
-}
-
-#labelPreco{
-	float: left;
-}
-
-#labelData{
-	float: left;
-}
-#labelObs{
-	float: left;
-}
-
 
 label {
     display: inline-block;
     width: 90px;
+}
+
+table {
+  border: 1px #c0c0c0 solid;
+  width: auto;
+}
+table th {
+  background-color: #34ABE0;
+  color: #fff;
+}
+table td {
+  background-color: #f0f0f0;
+  color: #0c0c0c;
 }

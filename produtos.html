@@ -8,47 +8,99 @@
 		<script src="js/db.js"></script>
 	</head>
 
-	<body onload="montaMenu()">
+	<body>
 
 		<section class="cabecalho" id="cabecalho"></section>
 
 		<section id="conteudo">	
 			<h1> Produtos </h1>			
 			<p>
-				<input type="button" value="Novo Produto" name="btnNovoProd" onclick="window.location.href='CadastroProduto.html'">
+				<input type="button" value="Novo Produto" name="btnNovoProd" onclick="window.location.href='cadastroProduto.html'">
 			</p>
 
 			<label>Nome</label>
-			<input type="text" size=30>
-			<input type="button" value="Pesquisar" onClick="pesquisarTabela()">
+			<input type="search" size="30" id="filtro" name="filtro" onkeyup="buscaProduto()">	
+			</br>
+			</br>
 
-			<table border="1">
-				<tr>
-					<td>Produtos</td>
-					<td>Ações</td>
-				</tr>
-				<tr>
-					<td>Produto1</td>
-					<td> <img src="imgs/editar.png"> <img src="imgs/excluir.png" ></td>
-				</tr>
-						<tr>
-					<td>Produto2</td>
-					<td> <img src="imgs/editar.png"> <img src="imgs/excluir.png" ></td>
-				</tr>
-			
-			</table>	
+			<div id="divprodutos">
+				
+			</div>
 
 		</section>
 		
-
 		<footer class="rodape" id="rodape">
 			
 				
 		</footer>
-		
-		<input type="button" value="Salvar">
-		<input type="button" value="Limpar">
-		<input type="button" value="Cancelar">
-
 	</body>
+	<script type="text/javascript">
+		function buscaProduto(){
+			var filtro = document.getElementById('filtro');
+			var tabela = document.getElementById('tblprod');
+			
+    		var nomeFiltro = filtro.value;
+    		nomeFiltro = nomeFiltro.trim();
+    		if (nomeFiltro.length > 0 ){
+	    		for (var i = 1; i < tabela.rows.length; i++) {
+	        		var conteudoCelula = tabela.rows[i].cells[1].innerText;
+	        		var corresponde = conteudoCelula.toLowerCase().indexOf(nomeFiltro) >= 0;
+	        		tabela.rows[i].style.display = corresponde ? '' : 'none';
+	    		}
+    		}else{
+	    		for (var i = 1; i < tabela.rows.length; i++) {
+	        		tabela.rows[i].style.display = '';
+	    		}
+    		}	    		
+		}
+
+		function montaTabela(){
+			var tabela;
+
+			tabela = "<table id='tblprod'>";
+			// Cabecalho
+			tabela = tabela + "<tr>";
+			tabela = tabela + "<th style='width:80px'>ID</th>";
+			tabela = tabela + "<th style='width:400px'>Produto</th>";
+			tabela = tabela + "<th style='width:100px'>Preço</th>";
+			tabela = tabela + "<th style='width:60px'>Ações</th>";
+			tabela = tabela + "</tr>";
+			//
+			var produto_volta = localStorage.getItem('produtos');
+			produtos = JSON.parse(produto_volta);	
+
+			for (var i = 0; i < produtos.length; i++) {
+				tabela = tabela + "<tr>";
+				tabela = tabela + "<td>"+produtos[i].id+"</td>";
+				tabela = tabela + "<td>"+produtos[i].produto+"</td>";
+				tabela = tabela + "<td>R$ "+produtos[i].preco+"</td>";
+				tabela = tabela + "<td><img src='imgs/editar.png' title='Editar'>";
+				tabela = tabela + "<img src='imgs/excluir.png' title='Excluir' onclick='excluirProduto("+i+")'></td>";
+				tabela = tabela + "</tr>";				
+			};
+
+			tabela = tabela + "</table>";
+
+			document.getElementById("divprodutos").innerHTML = tabela;
+		}
+
+		function excluirProduto(id){			
+			var parcial = localStorage.getItem('produtos');
+			produtos_volta = JSON.parse(parcial);
+
+			produtos_volta.splice(id,1);
+
+			localStorage.setItem('produtos',JSON.stringify(produtos_volta));
+
+			console.log("Produto deletado com sucesso");
+			console.log("Produtos:",produtos_volta);
+			montaTabela();
+
+		}
+
+		window.onload = function(){
+			montaMenu();
+			montaTabela();
+		}
+	</script>
 </html>

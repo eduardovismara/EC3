@@ -17,26 +17,36 @@
 			<h1>Cadastro de Produtos</h1>	
 			<br>
 
-			<form>
+			<form name="frmProdutos" onSubmit="return cadastraProduto()">
 			
-				<label>Produto</label>
+				<label><mark>*</mark>Produto</label>
 			
-				<input type="text" size="40px" name="txtProduto"><br><br>
-		
-			    <label>Preço</label>
-			
-				<input type="text" size="5px" name="txtPreco"><br><br>
-				
-				<label>Data</label>
+				<input type="text" size="40px" name="txtProduto" required autofocus><br><br>
 
-				<input type="date" size="20px" name="txtData"><br><br>
+				<label><mark>*</mark>Categoria</label>
+			
+				<select id="selecionarCategoria" required></select><br><br>
+		
+			    <label><mark>*</mark>Preço</label>
+			
+				<input type="text" size="5px" name="txtPreco" required><br><br>
+				
+				<label><mark>*</mark>Data</label>
+
+				<input type="date" size="20px" name="txtData" required><br><br>
 			
 				<label>Observação</label>
 
 				<input type="text" size="40px" name="txtObs"><br><br>
 
-				<input type="button" value="Cadastrar" onclick="cadastraProduto()">
-				<input type="button" value="Limpar">
+				<label>Ativo</label>
+
+				<input type="checkbox" name="checkAtivo" checked="true"><br><br>								
+
+				<input type="submit" value="Cadastrar" >
+				<input type="button" value="Limpar" onclick="limparCampos()">
+
+				<p>Campos com<mark>*</mark>são obrigatórios.</p>
 
 			</form>
 			
@@ -45,4 +55,46 @@
 		<footer class="rodape" id="rodape"></footer>
 
 	</body>
+
+	<!--Carrega categorias-->
+	<script type="text/javascript">	
+		var select = document.getElementById("selecionarCategoria");
+
+		var opt = "Nenhuma";
+		var el = document.createElement("option");
+		el.textContent = opt;
+		el.value = "";
+		el.id = "op-1";
+		select.appendChild(el);
+
+		select.selectedIndex = -1;
+		
+		var categorias_volta = localStorage.getItem('categorias');
+		categorias = JSON.parse(categorias_volta);	
+
+		for (var i = 0; i < categorias.length; i++) {
+			var cat = categorias[i].categoria;
+			var id = categorias[i].id;
+			if(document.getElementById("op"+id)){
+				continue;
+			}
+			var opt = cat;
+			var el = document.createElement("option");
+			el.textContent = opt;
+			el.value = id;
+			el.id = "op"+id;
+			select.appendChild(el);
+			select.reload;
+		};
+
+		function limparCampos() {			
+			window.document.frmProdutos.txtProduto.value = "";
+			window.document.frmProdutos.txtPreco.value = "";
+			window.document.frmProdutos.txtData.value = "";
+			window.document.frmProdutos.txtObs.value = "";
+			window.document.frmProdutos.checkAtivo.checked = "";
+			document.getElementById("selecionarCategoria").selectedIndex = -1;
+		}
+	</script>
+
 </html>

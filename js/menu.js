@@ -1,6 +1,6 @@
 function montaMenu(){
 	// Captura o nome da pagina que esta sendo carregada
-	nomeArquivo = window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1);
+	nomeArquivo = window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1);	
 	
 	// Define a logo, titulo e menu
 	cabecalho = "";
@@ -26,6 +26,8 @@ function montaMenu(){
 		document.getElementById('home').className = 'selecionado';
 	}else if (nomeArquivo == "produtos.html"){
 		document.getElementById('produtos').className = 'selecionado';
+	}else if (nomeArquivo == "cadastroProduto.html"){
+		document.getElementById('produtos').className = 'selecionado';
 	}else if (nomeArquivo == "categorias.html"){
 		document.getElementById('categorias').className = 'selecionado';
 	}else if (nomeArquivo == "sobre.html"){
@@ -35,8 +37,9 @@ function montaMenu(){
 
 	// define rodape
 	rodape = "";
-	rodape = rodape + "<p>Colocar alguma coisa</p>";
-
+	rodape = rodape + "</br></br>Todos os direitos reservados. Universidade Federal de Mato Grosso do Sul. Copyright © 2016</br>";
+ 	rodape = rodape + "(067) 3291-0202 /  Avenida Marcio Lima Nantes, s/n. Vila da Barra Cep: 79400-000 Coxim – MS";
+	
 	// seta cabecalho
 	document.getElementById("rodape").innerHTML = rodape;
 
