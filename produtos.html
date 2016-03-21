@@ -6,6 +6,9 @@
 		<link rel="stylesheet" type="text/css" href="css/estilo.css">
 		<script src="js/menu.js"></script>
 		<script src="js/db.js"></script>
+		<script src="js/uteis.js"></script>
+		<script src="js/produtos.js"  charset="UTF-8"></script>
+		<script src="js/categorias.js"></script>
 	</head>
 
 	<body>
@@ -17,9 +20,11 @@
 			<p>
 				<input type="button" value="Novo Produto" name="btnNovoProd" onclick="window.location.href='cadastroProduto.html'">
 			</p>
-
-			<label>Nome</label>
-			<input type="search" size="30" id="filtro" name="filtro" onkeyup="buscaProduto()">	
+			
+			<input type="search" size="30" id="filtro" name="filtro" onkeyup="buscaProduto()" placeholder="Busca Produdo.. Ex: Mouse">
+			<label>Categoria</label>			
+			<select id="selecionarCategoria" onchange="montaTabelaProd()"></select>	
+			<input type="checkbox" size="30" id="checkAtivo" name="checkAtivo" onclick="montaTabelaProd()"> Mostrar somente cadastros ativos
 			</br>
 			</br>
 
@@ -35,34 +40,22 @@
 		</footer>
 	</body>
 	<script type="text/javascript">
-		function buscaProduto(){
-			var filtro = document.getElementById('filtro');
-			var tabela = document.getElementById('tblprod');
-			
-    		var nomeFiltro = filtro.value;
-    		nomeFiltro = nomeFiltro.trim();
-    		if (nomeFiltro.length > 0 ){
-	    		for (var i = 1; i < tabela.rows.length; i++) {
-	        		var conteudoCelula = tabela.rows[i].cells[1].innerText;
-	        		var corresponde = conteudoCelula.toLowerCase().indexOf(nomeFiltro) >= 0;
-	        		tabela.rows[i].style.display = corresponde ? '' : 'none';
-	    		}
-    		}else{
-	    		for (var i = 1; i < tabela.rows.length; i++) {
-	        		tabela.rows[i].style.display = '';
-	    		}
-    		}	    		
+		window.onload = function(){
+			montaMenu();
+			montaTabelaProd();
 		}
-
-		function montaTabela(){
+		
+		function montaTabelaProd(){
 			var tabela;
 
 			tabela = "<table id='tblprod'>";
 			// Cabecalho
 			tabela = tabela + "<tr>";
 			tabela = tabela + "<th style='width:80px'>ID</th>";
-			tabela = tabela + "<th style='width:400px'>Produto</th>";
+			tabela = tabela + "<th style='width:120px'>Categoria</th>";
+			tabela = tabela + "<th style='width:350px'>Produto</th>";
 			tabela = tabela + "<th style='width:100px'>Preço</th>";
+			tabela = tabela + "<th style='width:40px'>Ativo</th>";
 			tabela = tabela + "<th style='width:60px'>Ações</th>";
 			tabela = tabela + "</tr>";
 			//
@@ -70,37 +63,73 @@
 			produtos = JSON.parse(produto_volta);	
 
 			for (var i = 0; i < produtos.length; i++) {
-				tabela = tabela + "<tr>";
-				tabela = tabela + "<td>"+produtos[i].id+"</td>";
-				tabela = tabela + "<td>"+produtos[i].produto+"</td>";
-				tabela = tabela + "<td>R$ "+produtos[i].preco+"</td>";
-				tabela = tabela + "<td><img src='imgs/editar.png' title='Editar'>";
-				tabela = tabela + "<img src='imgs/excluir.png' title='Excluir' onclick='excluirProduto("+i+")'></td>";
-				tabela = tabela + "</tr>";				
+				var mostrar = true;
+				if (document.getElementById('checkAtivo').checked){
+					if (produtos[i].ativo == false){
+						mostrar = false;
+					}
+				}
+				
+				var x = document.getElementById("selecionarCategoria").selectedIndex;
+				var y = document.getElementById("selecionarCategoria").options;
+
+				var txtcategoria = y[x].value;				
+				
+				if (txtcategoria != "-1"){
+					if (produtos[i].categoria.toString() != txtcategoria){
+						mostrar = false;
+					}				
+				}				
+				
+				if (mostrar){
+					tabela = tabela + "<tr>";
+					tabela = tabela + "<td>"+produtos[i].id+"</td>";
+					tabela = tabela + "<td>"+buscaNomeCat(produtos[i].categoria)+"</td>";
+					tabela = tabela + "<td>"+produtos[i].produto+"</td>";
+					tabela = tabela + "<td>R$ "+produtos[i].preco+"</td>";
+					if (produtos[i].ativo == true){
+					   tabela = tabela + "<td>Sim</td>";
+					}else{
+					   tabela = tabela + "<td>Não</td>";
+					}
+					tabela = tabela + "<td><img src='imgs/editar.png' title='Editar' onclick='editarProduto("+produtos[i].id+")'>";
+					tabela = tabela + "<img src='imgs/excluir.png' title='Excluir' onclick='excluirProduto("+produtos[i].id+")'></td>";
+					tabela = tabela + "</tr>";
+				}
 			};
 
 			tabela = tabela + "</table>";
 
 			document.getElementById("divprodutos").innerHTML = tabela;
-		}
+		};
+		
+		var select = document.getElementById("selecionarCategoria");
 
-		function excluirProduto(id){			
-			var parcial = localStorage.getItem('produtos');
-			produtos_volta = JSON.parse(parcial);
+		var opt = "Todas";
+		var el = document.createElement("option");
+		el.textContent = opt;
+		el.value = "-1";
+		el.id = "op-1";
+		select.appendChild(el);
 
-			produtos_volta.splice(id,1);
+		select.selectedIndex = -1;
+		
+		var categorias_volta = localStorage.getItem('categorias');
+		categorias = JSON.parse(categorias_volta);	
 
-			localStorage.setItem('produtos',JSON.stringify(produtos_volta));
-
-			console.log("Produto deletado com sucesso");
-			console.log("Produtos:",produtos_volta);
-			montaTabela();
-
-		}
-
-		window.onload = function(){
-			montaMenu();
-			montaTabela();
-		}
+		for (var i = 0; i < categorias.length; i++) {
+			var cat = categorias[i].categoria;
+			var id = categorias[i].id;
+			if(document.getElementById("op"+id)){
+				break;
+			}
+			var opt = cat;
+			var el = document.createElement("option");
+			el.textContent = opt;
+			el.value = id;
+			el.id = "op"+id;
+			select.appendChild(el);
+			select.reload;
+		};		
 	</script>
 </html>

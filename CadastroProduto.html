@@ -6,9 +6,12 @@
 		<link rel="stylesheet" type="text/css" href="css/estilo.css">
 		<script src="js/menu.js"></script>
 		<script src="js/db.js"></script>
+		<script src="js/uteis.js"></script>
+		<script src="js/produtos.js"></script>
+		<script src="js/categorias.js"></script>
 	</head>
 
-	<body onload="montaMenu()">
+	<body>
 
 		<section class="cabecalho" id="cabecalho"></section>
 
@@ -17,7 +20,7 @@
 			<h1>Cadastro de Produtos</h1>	
 			<br>
 
-			<form name="frmProdutos" onSubmit="return cadastraProduto()">
+			<form name="frmProdutos" id="frmProdutos" onSubmit="return cadastraProduto()" action="produtos.html">
 			
 				<label><mark>*</mark>Produto</label>
 			
@@ -46,7 +49,7 @@
 				<input type="submit" value="Cadastrar" >
 				<input type="button" value="Limpar" onclick="limparCampos()">
 
-				<p>Campos com<mark>*</mark>são obrigatórios.</p>
+				<p>Campos com<mark> * </mark>são obrigatórios.</p>
 
 			</form>
 			
@@ -76,7 +79,7 @@
 			var cat = categorias[i].categoria;
 			var id = categorias[i].id;
 			if(document.getElementById("op"+id)){
-				continue;
+				break;
 			}
 			var opt = cat;
 			var el = document.createElement("option");
@@ -86,7 +89,7 @@
 			select.appendChild(el);
 			select.reload;
 		};
-
+		
 		function limparCampos() {			
 			window.document.frmProdutos.txtProduto.value = "";
 			window.document.frmProdutos.txtPreco.value = "";
@@ -95,6 +98,12 @@
 			window.document.frmProdutos.checkAtivo.checked = "";
 			document.getElementById("selecionarCategoria").selectedIndex = -1;
 		}
+		
+		window.onload = function(){
+			montaMenu();
+			verificaEditarProduto();
+		}		
+				
 	</script>
 
 </html>
