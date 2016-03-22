@@ -21,7 +21,7 @@
 				<input type="button" value="Novo Produto" name="btnNovoProd" onclick="window.location.href='cadastroProduto.html'">
 			</p>
 			
-			<input type="search" size="30" id="filtro" name="filtro" onkeyup="buscaProduto()" placeholder="Busca Produdo.. Ex: Mouse">
+			<input type="search" size="30" id="filtroprod" name="filtroprod" onkeyup="buscaProduto()" placeholder="Busca Produdo.. Ex: Mouse">
 			<label>Categoria</label>			
 			<select id="selecionarCategoria" onchange="montaTabelaProd()"></select>	
 			<input type="checkbox" size="30" id="checkAtivo" name="checkAtivo" onclick="montaTabelaProd()"> Mostrar somente cadastros ativos
@@ -32,14 +32,26 @@
 				
 			</div>
 
+			</br>
+			</br>
+			
 		</section>
 		
 		<footer class="rodape" id="rodape">
 			
 				
 		</footer>
+
+		<script type="text/javascript">
+
+
+
+
+</script>
 	</body>
 	<script type="text/javascript">
+
+
 		window.onload = function(){
 			montaMenu();
 			montaTabelaProd();
@@ -56,7 +68,7 @@
 			tabela = tabela + "<th style='width:350px'>Produto</th>";
 			tabela = tabela + "<th style='width:100px'>Preço</th>";
 			tabela = tabela + "<th style='width:40px'>Ativo</th>";
-			tabela = tabela + "<th style='width:60px'>Ações</th>";
+			tabela = tabela + "<th style='width:45px'>Ações</th>";
 			tabela = tabela + "</tr>";
 			//
 			var produto_volta = localStorage.getItem('produtos');
@@ -92,10 +104,13 @@
 					}else{
 					   tabela = tabela + "<td>Não</td>";
 					}
-					tabela = tabela + "<td><img src='imgs/editar.png' title='Editar' onclick='editarProduto("+produtos[i].id+")'>";
-					tabela = tabela + "<img src='imgs/excluir.png' title='Excluir' onclick='excluirProduto("+produtos[i].id+")'></td>";
+					tabela = tabela + "<td><a href='javascript:void(0)'>";
+					tabela = tabela + "<img src='imgs/editar.png' title='Editar Produto' onclick='editarProduto("+produtos[i].id+")'>";
+					tabela = tabela + "</a>";
+					tabela = tabela + "<a href='javascript:void(0)'><img src='imgs/excluir.png' title='Excluir Produto' onclick='excluirProduto("+produtos[i].id+")'></a></td>";
 					tabela = tabela + "</tr>";
 				}
+				
 			};
 
 			tabela = tabela + "</table>";

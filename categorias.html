@@ -7,26 +7,79 @@
 		<script src="js/menu.js"></script>
 		<script src="js/db.js"></script>
 		<script src="js/uteis.js"></script>
-		<script src="js/produtos.js"></script>
+		<script src="js/produtos.js"  charset="UTF-8"></script>
 		<script src="js/categorias.js"></script>
-
 	</head>
 
-	<body onload="montaMenu()">
+	<body>
 
-		<section class="cabecalho" id="cabecalho">
-
-		</section>
+		<section class="cabecalho" id="cabecalho"></section>
 
 		<section id="conteudo">	
 			<h1> Categorias </h1>			
 			<p>
+				<input type="button" value="Nova Categoria" name="btnNovaCat" onclick="window.location.href='cadastroCategoria.html'">
 			</p>
+			
+			<input type="search" size="30" id="filtrocat" name="filtrocat" onkeyup="buscaCategoria()" placeholder="Busca Categoria.. Ex: Placa mãe">
+			
+			</br>
+			</br>
+
+			<div id="divcategorias">
+				
+			</div>
+			
+			</br>
+			</br>
+
 		</section>
 		
 		<footer class="rodape" id="rodape">
-  			
+			
+				
 		</footer>
 
+		<script type="text/javascript">
+
+</script>
 	</body>
+	<script type="text/javascript">
+
+
+		window.onload = function(){
+			montaMenu();
+			montaTabelaCat();
+		}
+		
+		function montaTabelaCat(){
+			var tabela;
+
+			tabela = "<table id='tblcat'>";
+			// Cabecalho
+			tabela = tabela + "<tr>";
+			tabela = tabela + "<th style='width:80px'>ID</th>";
+			tabela = tabela + "<th style='width:200px'>Categoria</th>";
+			tabela = tabela + "<th style='width:45px'>Ações</th>";
+			tabela = tabela + "</tr>";
+			//
+			var categoria_volta = localStorage.getItem('categorias');
+			categorias = JSON.parse(categoria_volta);	
+
+			for (var i = 0; i < categorias.length; i++) {
+					tabela = tabela + "<tr>";
+					tabela = tabela + "<td>"+categorias[i].id+"</td>";
+					tabela = tabela + "<td>"+categorias[i].categoria+"</td>";
+					tabela = tabela + "<td><a href='javascript:void(0)'>";
+					tabela = tabela + "<img src='imgs/editar.png' title='Editar Categoria' onclick='editarCategoria("+categorias[i].id+")'>";
+					tabela = tabela + "</a>";
+					tabela = tabela + "<a href='javascript:void(0)'><img src='imgs/excluir.png' title='Excluir Categoria' onclick='excluirCategoria("+categorias[i].id+")'></a></td>";
+					tabela = tabela + "</tr>";
+			};
+
+			tabela = tabela + "</table>";
+
+			document.getElementById("divcategorias").innerHTML = tabela;
+		};
+	</script>
 </html>

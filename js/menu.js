@@ -30,6 +30,8 @@ function montaMenu(){
 		document.getElementById('produtos').className = 'selecionado';
 	}else if (nomeArquivo == "categorias.html"){
 		document.getElementById('categorias').className = 'selecionado';
+	}else if (nomeArquivo == "cadastroCategoria.html"){
+		document.getElementById('categorias').className = 'selecionado';
 	}else if (nomeArquivo == "sobre.html"){
 		document.getElementById('sobre').className = 'selecionado';
 	}

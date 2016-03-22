@@ -29,7 +29,10 @@ function cadastraProduto(){
 
 	console.log("Produto cadastrado com sucesso");
 	console.log("Produtos:",produtos_volta);
+
+	msgDlg("Cadastrado");
 }
+
 function alteraProduto(idEdit){
 	var parcial = localStorage.getItem('produtos');
 	produtos_volta = JSON.parse(parcial);
@@ -88,11 +91,13 @@ function verificaEditarProduto(){
 				break;
 			}
 		}			
-		document.getElementById('frmProdutos').setAttribute('onSubmit','return alteraProduto('+idEdit+')');		
+		document.getElementById('frmProdutos').setAttribute('onSubmit','return alteraProduto('+idEdit+')');
+		document.getElementById('btnCadastrarPro').setAttribute('value','Salvar Alteração');
 	}
 }
+
 function buscaProduto(){
-	var filtro = document.getElementById('filtro');
+	var filtro = document.getElementById('filtroprod');
 	var tabela = document.getElementById('tblprod');
 	
 	var nomeFiltro = filtro.value;

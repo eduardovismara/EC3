@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 	<head>
-		<title>Produtos</title>
+		<title>Cadastro de Categoria</title>
 		<meta charset="UTF-8">		
 		<link rel="stylesheet" type="text/css" href="css/estilo.css">
 		<script src="js/menu.js"></script>
@@ -11,84 +11,47 @@
 		<script src="js/categorias.js"></script>
 	</head>
 
-	<body onload="montaMenu()">
+	<body>
 
 		<section class="cabecalho" id="cabecalho"></section>
 
 		<section id="conteudo">	
-			<h1> Categorias </h1>			
+
+			<h1>Cadastro de Categoria</h1>	
+			<br>
+
+			<form name="frmCategoria" id="frmCategoria" onSubmit="return cadastraCategoria()" action="categorias.html">
 			
-			<div id="labelNome">
-				<label>
-					Nome
-				</label>
-			</div>
+				<label><mark>*</mark>Categoria</label>
+			
+				<input type="text" size="40px" name="txtCategoria" required autofocus><br><br>
 
-			<div id="textNome">
-				<INPUT type="text" size=30>
-			</div>
-			<Br>
+				<input type="submit" value="Cadastrar" id="btnCadastrarCat" >				
+				<input type="button" value="Limpar" onclick="limparCampos()">
 
-			<label>Produtos</label>
-			<INPUT type="text" size=30>
-			<INPUT type=button value="+" onClick="cadastroProduto()">
-    <Br>
-    <Br>
-	<table border="1"></td>
-		</tr>
-		<tr>
-			<td>Produto1</td>
-			<td>Código</td>
-			<td>Preço</td>
-			<td>Excluir</td>
-		</tr>
+				<p>Campos com<mark> * </mark>são obrigatórios.</p>
 
-		<tr>
-			<td>Produto2</td>
-			<td>0000</td>
-			<td>1111</td>
-			<td>Excluir</td>
-		</tr>
-
-		<tr>
-			<td>Produto2</td>
-			<td>1111</td>
-			<td>2222</td>
-			<td>Excluir</td>
-		</tr>
-				
-		<tr>
-			<td>Produto3</td>
-			<td>2222</td>
-			<td>3333</td>
-			<td>Excluir</td>
-		</tr>
-
-		<tr>
-			<td>Produto4</td>
-			<td>3333</td>
-			<td>4444</td>
-			<td>Excluir</td>
-		</tr>
-	</table>	
-	<Br>
-	<Br>
-		<input type="button" value="Salvar">
-		<input type="button" value="Limpar">
-		<input type="button" value="Cancelar">
+			</form>
+			
 
 		</section>
-		
-
-		<footer class="rodape" id="rodape">
-			
-				
-		</footer>
-
-		
 
 
-
+		<footer class="rodape" id="rodape"></footer>
 
 	</body>
+
+	<!--Carrega categorias-->
+	<script type="text/javascript">	
+		function limparCampos() {			
+			window.document.frmCategoria.txtCategoria.value = "";
+		}
+		
+		window.onload = function(){
+			montaMenu();
+			verificaEditarCategoria();
+		}		
+				
+	</script>
+
 </html>
