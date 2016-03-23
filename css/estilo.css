@@ -110,6 +110,7 @@ p{
 label {
     display: inline-block;
     width: 90px;
+    font-weight:bold;
 }
 
 table {
@@ -123,4 +124,10 @@ table th {
 table td {
   background-color: #f0f0f0;
   color: #0c0c0c;
+}
+
+mark {
+    background-color: white;
+    color: red;
+    font-weight:bold;
 }

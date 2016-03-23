@@ -17,24 +17,34 @@ function montaMenu(){
 	cabecalho = cabecalho + "</ul>";
 	cabecalho = cabecalho + "</nav>";	
 
-
 	// seta cabecalho
 	document.getElementById("cabecalho").innerHTML = cabecalho;
 
+	var rota="";
 	// seta qual o menu esta selecionado
 	if (nomeArquivo == "index.html"){
 		document.getElementById('home').className = 'selecionado';
+		rota = "Home";
 	}else if (nomeArquivo == "produtos.html"){
 		document.getElementById('produtos').className = 'selecionado';
+		rota = "Home -> Produtos";
 	}else if (nomeArquivo == "cadastroProduto.html"){
 		document.getElementById('produtos').className = 'selecionado';
+		rota = "Home -> Produtos -> Cadastro de Produto";
 	}else if (nomeArquivo == "categorias.html"){
 		document.getElementById('categorias').className = 'selecionado';
+		rota = "Home -> Categoria";
 	}else if (nomeArquivo == "cadastroCategoria.html"){
 		document.getElementById('categorias').className = 'selecionado';
+		rota = "Home -> Produtos -> Cadastro de Categoria";
 	}else if (nomeArquivo == "sobre.html"){
 		document.getElementById('sobre').className = 'selecionado';
+		rota = "Home -> Sobre";
 	}
+
+	rota = "<br>"+rota;
+
+	document.getElementById("cabecalho").innerHTML = document.getElementById("cabecalho").innerHTML+rota;
 
 
 	// define rodape
